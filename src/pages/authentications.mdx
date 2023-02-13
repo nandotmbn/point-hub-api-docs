@@ -1,0 +1,206 @@
+export const description =
+  'On this page, we’ll dive into the different group endpoints you can use to manage groups programmatically.'
+
+# Authentications
+
+---
+
+## The group model
+
+---
+
+### Properties
+
+<Properties>
+  <Property name="username" type="string">
+    Unique identifier for the users.
+  </Property>
+  <Property name="email" type="string">
+    The email for the users.
+  </Property>
+  <Property name="password" type="string">
+    The password for the users.
+  </Property>
+</Properties>
+
+---
+
+## Login {{ tag: 'POST', label: '/api/v1/auth/login' }}
+
+<Row>
+  <Col>
+
+    This endpoint allows you to login.
+    <Properties>
+      <Property name="email" type="string">
+        The email for the users.
+      </Property>
+      <Property name="password" type="string">
+        The password for the users.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/auth/login">
+
+    ```bash {{ title: 'cURL' }}
+    curl --location --request POST 'https://pointhub-lxz6xwlfka-et.a.run.app/api/v1/auth/login' \
+      --header 'Accept-Language: id-ID' \
+      --data-raw '{
+          "email": "orlando@point.com",
+          "password": "helloworld"
+      }'
+    ```
+
+    ```js
+    var myHeaders = new Headers();
+    myHeaders.append("Accept-Language", "id-ID");
+
+    var raw = "{\r\n    \"email\": \"orlando@point.com\",\r\n    \"password\": \"helloworld\"\r\n}";
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("https://pointhub-lxz6xwlfka-et.a.run.app/api/v1/auth/login", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    ```
+
+    ```python
+    import requests
+
+    url = "https://pointhub-lxz6xwlfka-et.a.run.app/api/v1/auth/login"
+
+    payload = "{\r\n    \"email\": \"orlando@point.com\",\r\n    \"password\": \"helloworld\"\r\n}"
+    headers = {
+      'Accept-Language': 'id-ID'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
+
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+      {
+          "statusCode": 200,
+          "data": {
+              "_id": "63e9453c16752cd1467ea640",
+              "username": "Orlando",
+              "email": "orlando@point.com",
+              "password": "$2b$10$nrQgQ.1PYQ09U03kqG1NseGN.gO5R7X2G4b4UEdDocrJatunvDm9u",
+              "isArchived": false,
+              "isActive": true,
+              "createdAt": "2023-02-12T19:59:56.093Z",
+              "updatedAt": "2023-02-12T19:59:56.093Z",
+              "__v": 0
+          },
+          "message": "You have successfully logged in!"
+      }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Register {{ tag: 'POST', label: '/api/v1/auth/register' }}
+
+<Row>
+  <Col>
+
+    This endpoint allows you to register users.
+    <Properties>
+      <Property name="username" type="string">
+        Unique identifier for the users.
+      </Property>
+      <Property name="email" type="string">
+        The email for the users.
+      </Property>
+      <Property name="password" type="string">
+        The password for the users.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="POST" label="/api/v1/auth/register">
+
+    ```bash {{ title: 'cURL' }}
+    curl --location --request POST 'https://pointhub-lxz6xwlfka-et.a.run.app/api/v1/auth/register' \
+      --header 'Accept-Language: id-ID' \
+      --data-raw '{
+          "username": "Orlando",
+          "email": "orlando@point.com",
+          "password": "helloworld"
+      }'
+    ```
+
+    ```js
+    var myHeaders = new Headers();
+    myHeaders.append("Accept-Language", "id-ID");
+
+    var raw = "{\r\n    \"username\": \"Orlando\",\r\n    \"email\": \"orlando@point.com\",\r\n    \"password\": \"helloworld\"\r\n}";
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("https://pointhub-lxz6xwlfka-et.a.run.app/api/v1/auth/register", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    ```
+
+    ```python
+    import http.client
+
+    conn = http.client.HTTPSConnection("pointhub-lxz6xwlfka-et.a.run.app")
+    payload = "{\r\n    \"username\": \"Orlando\",\r\n    \"email\": \"orlando@point.com\",\r\n    \"password\": \"helloworld\"\r\n}"
+    headers = {
+      'Accept-Language': 'id-ID'
+    }
+    conn.request("POST", "/api/v1/auth/register", payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+    print(data.decode("utf-8"))
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+        "statusCode": 201,
+        "data": {
+            "username": "Orlando2",
+            "email": "orlando2@point.com",
+            "password": "$2b$10$MN1aTJZx8Fw1uudCTp1i0OaPSYd12Ohr7TFHPBP2XKB8kTIoZhtDS",
+            "isArchived": false,
+            "isActive": true,
+            "_id": "63eab2533cd510ae047b08c1",
+            "createdAt": "2023-02-13T21:57:39.298Z",
+            "updatedAt": "2023-02-13T21:57:39.298Z",
+            "__v": 0
+        },
+        "message": "User berhasil didaftarkan"
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
